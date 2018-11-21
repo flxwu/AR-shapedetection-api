@@ -58,25 +58,6 @@
 	const img = new Image();
 	img.src = 'filter.png';
 
-	navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-		.then(stream => {
-			video.srcObject = stream;
-
-			setTimeout(() => {
-				setInterval(() => {
-					faceDetector.detect(video)
-						.then((detectedFaces) => {
-							context.clearRect(0,0, canvas.width, canvas.height);
-							for (let face of detectedFaces) {
-								const { x, y, width, height } = face.boundingBox;
-
-								context.drawImage(img, x, y - height * 0.75, width * 1.25, height);
-							}
-						});
-				}, 250);
-			}, 1000);
-		});
-
 </script>
 
 </html>
